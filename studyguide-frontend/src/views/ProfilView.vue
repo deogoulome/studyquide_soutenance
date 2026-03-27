@@ -62,11 +62,17 @@
                     :class="statutClass(p.status)">
                     {{ statutLabel(p.status) }}
                   </span>
-                  <a :href="`http://localhost:5000/api/preinscriptions/${p.id}/pdf`"
+                  <a v-if="p.imgReleve"
+                    :href="`http://localhost:5000/uploads/${p.imgReleve}`"
                     target="_blank"
-                    class="text-xs text-blue-600 hover:underline font-medium">
-                    📄 PDF
+                    class="text-xs text-blue-600 hover:underline font-medium flex items-center gap-1">
+                    📎 Mon relevé
                   </a>
+                  <!-- Fiche de préinscription PDF -->
+                  <button @click="telechargerPDF(p.id)"
+                    class="text-xs text-violet-600 hover:underline font-medium flex items-center gap-1">
+                    📄 Fiche PDF
+                  </button>
                 </div>
               </div>
             </div>
@@ -216,6 +222,23 @@ async function changerMdp() {
     loadingMdp.value = false
   }
 }
+async function telechargerPDF(id) {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`http://localhost:5000/api/preinscriptions/${id}/pdf`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    if (!response.ok) throw new Error('Erreur PDF')
+    const blob = await response.blob()
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank')
+  } catch (e) {
+    console.error('Erreur PDF:', e)
+    alert('Impossible de générer le PDF')
+  }
+}
+
+
 
 onMounted(async () => {
   try {

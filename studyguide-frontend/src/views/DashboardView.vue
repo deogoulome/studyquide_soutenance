@@ -73,27 +73,30 @@
                   {{ statutLabel(p.status) }}
                 </span>
               </td>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-2">
-                  <button v-if="p.status === 'pending'"
-                    @click="action(p.id, 'valider')"
-                    :disabled="actionEnCours === p.id"
-                    class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
-                    Valider
-                  </button>
-                  <button v-if="p.status === 'pending'"
-                    @click="action(p.id, 'annuler')"
-                    :disabled="actionEnCours === p.id"
-                    class="text-xs bg-red-50 hover:bg-red-100 text-red-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
-                    Annuler
-                  </button>
-                  <a :href="`http://localhost:5000/api/preinscriptions/${p.id}/pdf`"
-                    target="_blank"
-                    class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
-                    PDF
-                  </a>
-                </div>
-              </td>
+           <td class="px-6 py-4">
+            <div class="flex items-center gap-2">
+              <button v-if="p.status === 'pending'"
+                @click="action(p.id, 'valider')"
+                :disabled="actionEnCours === p.id"
+                class="text-xs bg-green-50 hover:bg-green-100 text-green-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                Valider
+              </button>
+              <button v-if="p.status === 'pending'"
+                @click="action(p.id, 'annuler')"
+                :disabled="actionEnCours === p.id"
+                class="text-xs bg-red-50 hover:bg-red-100 text-red-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                Annuler
+              </button>
+              <!-- Relevé uploadé par l'étudiant -->
+                <a v-if="p.imgReleve"
+                :href="`http://localhost:5000/uploads/${p.imgReleve}`"
+                target="_blank"
+                class="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                📎 Relevé
+              </a>
+              <span v-else class="text-xs text-gray-300 italic">Pas de relevé</span>
+            </div>
+          </td>
             </tr>
           </tbody>
         </table>

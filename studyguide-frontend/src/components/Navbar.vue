@@ -8,9 +8,12 @@
 
         <!-- Logo -->
         <router-link to="/" class="flex items-center gap-2.5 group">
-          <div class="w-9 h-9 bg-gradient-to-br from-brand-500 to-violet-600 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
-            <span class="text-white font-black text-sm tracking-tight">SG</span>
-          </div>
+          <img
+            src="http://localhost:5000/img/STG.png"
+            alt="StudyGuide"
+            class="h-10 w-auto object-contain"
+            @error="e => e.target.style.display='none'"
+          />
           <span class="font-bold text-gray-900 text-lg tracking-tight">
             Study<span class="gradient-text">Guide</span>
           </span>
@@ -72,14 +75,8 @@ const auth = useAuthStore()
 const router = useRouter()
 const scrolled = ref(false)
 
-function handleScroll() {
-  scrolled.value = window.scrollY > 20
-}
-
-function handleLogout() {
-  auth.logout()
-  router.push('/')
-}
+function handleScroll() { scrolled.value = window.scrollY > 20 }
+function handleLogout() { auth.logout(); router.push('/') }
 
 onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
@@ -88,8 +85,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <style scoped>
 .nav-link {
   @apply px-3 py-2 rounded-lg text-sm font-medium text-gray-600
-    hover:text-brand-600 hover:bg-brand-50
-    transition-all duration-200;
+    hover:text-brand-600 hover:bg-brand-50 transition-all duration-200;
 }
 .router-link-active.nav-link {
   @apply text-brand-600 bg-brand-50 font-semibold;

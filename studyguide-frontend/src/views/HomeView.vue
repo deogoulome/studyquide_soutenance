@@ -1,75 +1,65 @@
 <template>
   <div class="overflow-hidden">
 
-    <!-- HERO -->
-    <section class="relative min-h-screen flex items-center bg-slate-950 overflow-hidden">
-      <!-- Fond animé -->
+    <!-- HERO avec vraie photo étudiants -->
+    <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+      <!-- Image de fond -->
       <div class="absolute inset-0">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-violet-600/20 rounded-full blur-3xl animate-pulse-slow animate-delay-300"></div>
-        <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow animate-delay-500"></div>
-        <!-- Grille -->
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+        <img
+          src="http://localhost:5000/img/img1.jpg"
+          alt="Étudiants"
+          class="w-full h-full object-cover object-center"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/75 to-slate-900/40"></div>
       </div>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 w-full">
-        <div class="max-w-4xl mx-auto text-center">
+        <div class="max-w-2xl">
 
           <!-- Badge -->
-          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white/80 text-sm px-4 py-2 rounded-full mb-8 animate-fade-in">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white/90 text-sm px-4 py-2 rounded-full mb-8">
             <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
             Plateforme d'orientation universitaire au Bénin
           </div>
 
           <!-- Titre -->
-          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight mb-6 animate-fade-up">
-            Trouve ta
+          <h1 class="text-5xl sm:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+            Explorez les
             <span class="bg-gradient-to-r from-brand-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
-              filière idéale
+              possibilités
             </span>
-            dès aujourd'hui
+            de carrière
           </h1>
 
-          <p class="text-slate-400 text-xl mb-10 max-w-2xl mx-auto animate-fade-up animate-delay-100">
-            Explore les filières, compare les universités et préinscris-toi en ligne en quelques minutes.
+          <p class="text-slate-300 text-xl mb-10 leading-relaxed">
+            Répondez aux questions sur vos intérêts et vos passions pour en savoir plus sur les cheminements de carrière possibles à envisager.
           </p>
 
           <!-- CTA -->
-          <div class="flex flex-wrap gap-4 justify-center animate-fade-up animate-delay-200">
-            <router-link to="/filieres"
-              class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-200 shadow-glow hover:shadow-glow-lg hover:-translate-y-1 text-lg">
-              Explorer les filières
-              <span>→</span>
-            </router-link>
+          <div class="flex flex-wrap gap-4">
             <router-link to="/quiz"
-              class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 text-lg">
-              Faire le quiz
-              <span class="text-yellow-400">✦</span>
+              class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-200 shadow-glow hover:-translate-y-1 text-lg">
+              Faire le Quiz ✦
+            </router-link>
+            <router-link to="/filieres"
+              class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-200 hover:-translate-y-1 text-lg">
+              Explorer les filières →
             </router-link>
           </div>
 
           <!-- Stats -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 animate-fade-up animate-delay-300">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-14">
             <div v-for="stat in stats" :key="stat.label"
-              class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all duration-300">
-              <div class="text-3xl font-black text-white mb-1">{{ stat.value }}</div>
-              <div class="text-slate-400 text-sm">{{ stat.label }}</div>
+              class="bg-white/10 backdrop-blur border border-white/15 rounded-2xl p-4">
+              <div class="text-2xl font-black text-white mb-1">{{ stat.value }}</div>
+              <div class="text-slate-400 text-xs">{{ stat.label }}</div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs animate-bounce">
-        <span>Défiler</span>
-        <div class="w-5 h-8 border-2 border-slate-600 rounded-full flex items-start justify-center pt-1.5">
-          <div class="w-1 h-2 bg-slate-500 rounded-full animate-bounce"></div>
-        </div>
-      </div>
     </section>
 
-    <!-- FONCTIONNALITÉS -->
-    <section class="py-24 bg-white">
+ <section class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
           <span class="badge bg-brand-50 text-brand-600 mb-4">Fonctionnalités</span>
@@ -104,47 +94,10 @@
       </div>
     </section>
 
-    <!-- FILIÈRES -->
-    <section class="py-24 bg-slate-50">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-          <div>
-            <span class="badge bg-green-50 text-green-600 mb-3">Formations</span>
-            <h2 class="section-title">Filières populaires</h2>
-          </div>
-          <router-link to="/filieres" class="btn-secondary self-start md:self-auto">
-            Voir toutes les filières →
-          </router-link>
-        </div>
 
-        <div v-if="loadingFilieres" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div v-for="i in 3" :key="i" class="card animate-pulse h-48"></div>
-        </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="filiere in filieres.slice(0,6)" :key="filiere.id"
-            class="card-hover group"
-            @click="$router.push(`/filieres/${filiere.id}`)">
-            <div class="flex items-start justify-between mb-4">
-              <span class="badge" :class="deptBadge(filiere.departement?.nom)">
-                {{ filiere.departement?.nom }}
-              </span>
-              <span class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-brand-50 group-hover:text-brand-500 transition-all">→</span>
-            </div>
-            <h3 class="font-bold text-gray-900 text-lg mb-2 group-hover:text-brand-600 transition-colors leading-snug">
-              {{ filiere.nom }}
-            </h3>
-            <p class="text-sm text-gray-500 leading-relaxed line-clamp-2">{{ filiere.description }}</p>
-            <div class="mt-4 pt-4 border-t border-gray-50 text-xs text-gray-400 font-medium">
-              Séries : {{ filiere.serieBac }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WEBINAIRES -->
-    <section class="py-24 bg-white">
+    <!-- SECTION : Webinaires -->
+    <section class="py-20 bg-slate-50">
       <div class="max-w-7xl mx-auto px-4">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
@@ -156,11 +109,11 @@
           </router-link>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6">
-          <div v-for="w in webinaires.slice(0,2)" :key="w.id"
-            class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-for="w in webinaires.slice(0,3)" :key="w.id"
+            class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-7 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             @click="$router.push('/webinaires')">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-0 right-0 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl"></div>
             <div class="relative">
               <div class="flex justify-between items-start mb-4">
                 <span class="badge bg-white/10 text-white/80 border border-white/10">
@@ -171,11 +124,11 @@
                   {{ w.placesRestantes > 0 ? `${w.placesRestantes} places` : 'Complet' }}
                 </span>
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">{{ w.titre }}</h3>
-              <p class="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-6">{{ w.description }}</p>
-              <div class="flex items-center gap-3">
-                <span class="text-slate-400 text-sm">🕐 {{ w.heure }}</span>
-                <span class="ml-auto text-brand-400 font-semibold text-sm group-hover:translate-x-1 transition-transform inline-block">
+              <h3 class="text-lg font-bold text-white mb-3 leading-snug">{{ w.titre }}</h3>
+              <p class="text-slate-400 text-sm leading-relaxed line-clamp-2 mb-5">{{ w.description }}</p>
+              <div class="flex items-center gap-3 text-sm text-slate-400">
+                <span>🕐 {{ w.heure }}</span>
+                <span class="ml-auto text-brand-400 font-semibold group-hover:translate-x-1 transition-transform inline-block">
                   S'inscrire →
                 </span>
               </div>
@@ -188,6 +141,10 @@
     <!-- CTA FINAL -->
     <section class="py-24 bg-gradient-to-br from-brand-600 via-brand-700 to-violet-700 relative overflow-hidden">
       <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+      <!-- Image décorative -->
+      <div class="absolute right-0 bottom-0 h-full opacity-20 pointer-events-none">
+        <img src="http://localhost:5000/img/smile-removebg-preview.png" alt="" class="h-full object-contain object-bottom" />
+      </div>
       <div class="relative max-w-3xl mx-auto px-4 text-center">
         <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
           Prêt à démarrer ton avenir ?
@@ -197,8 +154,7 @@
         </p>
         <router-link to="/register"
           class="inline-flex items-center gap-3 bg-white text-brand-700 font-black px-10 py-5 rounded-2xl hover:bg-blue-50 transition-all duration-200 shadow-2xl hover:-translate-y-1 text-lg">
-          Commencer gratuitement
-          <span>→</span>
+          Commencer gratuitement →
         </router-link>
       </div>
     </section>

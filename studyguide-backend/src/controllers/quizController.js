@@ -1,13 +1,12 @@
-const { QuizQuestion, Filiere } = require('../models')
+const { QuizQuestion, Filiere, sequelize } = require('../models')
 
 // GET /api/quiz
 exports.getQuestions = async (req, res) => {
   try {
     const questions = await QuizQuestion.findAll({
       include: [{ model: Filiere, as: 'filiere', attributes: ['id', 'nom'] }],
-      order: sequelize.random ? [sequelize.fn('RANDOM')] : [['id', 'ASC']],
+      order: sequelize.literal('RANDOM()'),
     })
-    // Masquer la bonne réponse
     const result = questions.map(q => ({
       id: q.id,
       question: q.question,
@@ -25,7 +24,7 @@ exports.getQuestions = async (req, res) => {
 // POST /api/quiz/resultat
 exports.calculerResultat = async (req, res) => {
   try {
-    const { reponses } = req.body // [{ questionId, reponse }]
+    const { reponses } = req.body
     const questions = await QuizQuestion.findAll({
       include: [{ model: Filiere, as: 'filiere', attributes: ['id', 'nom'] }],
     })
@@ -39,12 +38,14 @@ exports.calculerResultat = async (req, res) => {
       }
     })
 
-    // Trier par score
     const sorted = Object.entries(scores)
       .sort(([, a], [, b]) => b - a)
       .map(([filiere, score]) => ({ filiere, score }))
 
-    res.json({ scores: sorted, recommandation: sorted[0]?.filiere || 'Aucune recommandation' })
+    res.json({
+      scores: sorted,
+      recommandation: sorted[0]?.filiere || 'Aucune recommandation',
+    })
   } catch (err) {
     res.status(500).json({ message: 'Erreur serveur', error: err.message })
   }
